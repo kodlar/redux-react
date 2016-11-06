@@ -1,0 +1,21 @@
+{
+	"teams": [{
+			"hometeam": "fenerbahçe",
+			"awayteam": "galatasaray",
+			"hometeamCurrenScore": 2,
+			"awayteamCurrenScore": 0
+		}, {
+			"hometeam": "beşiktaş",
+			"awayteam": "eskişehirspor",
+			"hometeamCurrenScore": 1,
+			"awayteamCurrenScore": 0
+		}, {
+			"hometeam": "altay",
+			"awayteam": "trabzon",
+			"hometeamCurrenScore": 1,
+			"awayteamCurrenScore": 1
+		}
+
+	]
+
+}

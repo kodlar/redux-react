@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>livescore page</title>
+    <!--STEP 1.1-->
+    <!--<script src="https://npmcdn.com/redux@latest/dist/redux.min.js"></script>-->
+    <script src="redux.min.js"></script>
+<!--<script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>-->
+
+    <!--~end STEP 1.1-->
+  </head>
+  <body>
+    <div>
+      <p>
+       <div>
+         <span id="team1">fenerbahçe</span>
+         <span id ="team1score"></span>
+         -
+         <span id ="ateam1score">0</span>
+        <span id ="ateam1score"> cincon</span>
+       </div>
+
+      </p>
+    </div>
+<button id="update">Sonuçları güncelle</button>
+<script type="text/javascript">
+var data = {
+	"teams": [{
+			"hometeam": "fenerbahçe",
+			"awayteam": "galatasaray",
+			"hometeamCurrenScore": 3,
+			"awayteamCurrenScore": 0
+		}, {
+			"hometeam": "beşiktaş",
+			"awayteam": "eskişehirspor",
+			"hometeamCurrenScore": 1,
+			"awayteamCurrenScore": 0
+		}, {
+			"hometeam": "altay",
+			"awayteam": "trabzon",
+			"hometeamCurrenScore": 1,
+			"awayteamCurrenScore": 1
+		}
+
+	]
+
+}
+/*
+//$.getJSON( "ajax/livescore.json", function( data ) {
+  var items = [];
+  $.each( data, function( key, val ) {
+    //console.log(key);
+    //console.log(val);
+    //console.log(val.length);
+    for (i = 0; i < val.length; i++)
+     {
+    items.push( "<li id='" + i + "'>" + val[i].hometeam + "</li>" );
+     }
+
+  });
+
+  $( "<ul/>", {
+    "class": "my-new-list",
+    html: items.join( "" )
+  }).appendTo( "body" );
+//});
+
+
+*/
+
+  //store nesnesi ilk olarak oluşturulur.
+  var store = Redux.createStore(livescore);
+  // ekrandaki öğelere değişikliklerin yansıtılması
+  var team1score = document.getElementById('team1score');
+  function render() {
+    var state = store.getState();
+    team1score.innerHTML = state.teams[0].hometeamCurrenScore;
+  }
+  //ekrandaki durumu render'ı ilk yüklemede çalıştır
+  render();
+ // store nesnesindeki değişiklikleri render fonksiyonuna yansıt
+  store.subscribe(render);
+
+   function livescore(currentState,action)
+   {
+       var DEFAULT_STATE = data;
+       var nextState =  Object.assign({},currentState);
+
+         if(currentState === undefined)
+         {
+           nextState = DEFAULT_STATE;
+
+           return nextState;
+         }
+
+         switch(action.type)
+         {
+           case 'update':
+                 nextState.teams[0].hometeamCurrenScore = parseInt(data.teams[0].hometeamCurrenScore) + 1;
+                 return nextState;
+
+           default :
+             return nextState;
+         }
+   }
+
+
+window.setInterval(function(){
+  var action = { type : 'update'}
+  store.dispatch(action);
+
+}, 1000);
+
+   document.getElementById('update')
+     .addEventListener('click', function () {
+
+           var action = { type : 'update'}
+           store.dispatch(action);
+
+     })
+
+</script>
+
+
+   </body>
+  </html>
