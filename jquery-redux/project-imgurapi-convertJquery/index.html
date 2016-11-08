@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Redux basic example with jquery</title>
+    <!--STEP 1.1-->
+    <!--<script src="https://npmcdn.com/redux@latest/dist/redux.min.js"></script>-->
+    <script src="redux.min.js"></script>
+    <!--~end STEP 1.1-->
+	  <script src="_fakeServerApi/index.js"></script>
+	 
+	  <script src="actions/index.js"></script>
+	  <script src="reducers/counter.js"></script>
+	  <script src="reducers/sum.js"></script>
+	   <script
+    src="https://code.jquery.com/jquery-3.1.1.min.js"
+    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+	  <script src="reducers/images.js"></script>
+	  <script src="reducers/index.js"></script>
+	  <script src="middlewares/index.js"></script>
+  </head>
+  <body>
+    <div>
+      <p>
+        Clicked: <span id="value">0</span> times
+        <button id="decrement">Decrease</button>
+        <button id="incrementAsync">Increment async</button>
+		  <br />Count status <span id="status" style="color:blue;"> </span>
+      </p>
+      <p>
+        <input id="a" value="1" style="width:50px;">
+         +
+        <input id="b" value="2" style="width:50px;">
+         =
+        <span id="value2">3</span>
+        <button id="sum">Topla</button>
+      </p>
+		<!-- imgur mockup -->
+		<p>
+			<button id="randomImagesButton">Random Images Async> </button>
+			<br /> Count status : <span id="imagesStatus" style="color:blue"></span>
+			<p id="imagesList"></p>
+		</p>
+    </div>
+ 	<script src="index.js"></script>
+	  <script type="text/javascript">
+		  $('#decrement').click(() => store.dispatch(decrease()));
+
+	      $('#incrementAsync').click(() => store.dispatch(asyncIncrease));
+
+		  $('#sum').click(() =>
+			  var a = $('#a').val();
+			  var b = $('#b').val();
+			  store.dispatch(getSum(a,b));
+			)
+		  
+		  $('#randomImagesButton').click(() => store.dispatch(getRandomImages));
+
+
+	  </script>
+  </body>
+</html>
